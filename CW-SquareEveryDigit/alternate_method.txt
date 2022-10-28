@@ -1,0 +1,19 @@
+{
+public static int SquareDigits(int n) {
+
+    String inputNums = n + "";
+    String[] digits = inputNums.Split("");
+    String outputNums = "";
+
+
+    foreach (string s in digits) {
+      int i = Int32.Parse(s);
+      var outputNum =  (i * i);
+      outputNums += (outputNum);
+
+    }
+
+    return Int32.Parse(outputNums);
+
+  }
+}
