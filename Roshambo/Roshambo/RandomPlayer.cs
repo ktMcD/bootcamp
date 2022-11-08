@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Roshambo
 {
-    public class RandomPlayer :Player
+    public class RandomPlayer : Player
     {
         public override string Name { get; set; }
         public override string RoshamboValue { get; set; }
@@ -21,36 +21,18 @@ namespace Roshambo
         public override string GenerateRoshambo()
         {
             string roThrow = "";
-            int randomThrow = GetRandomNumber();
-            switch (randomThrow)
-            {
-                case 1:
-                {
-                    roThrow = "rock";
-                    break;
-                }
-                case 2:
-                {
-                    roThrow = "paper";
-                    break;
-                }
-
-                default:
-                {
-                    roThrow = "scissors";
-                    break;
-                }
-            }
+            string randomThrow = GetRandomEnum<Roshambo>();
             return roThrow;
 
         }
 
-        private int GetRandomNumber()
+        public string GetRandomEnum<Roshambo>()
         {
-            Random randomNumber = new Random();
-            int randomThrow = randomNumber.Next(1, 3);
+            Random randomFromEnum = new Random();
+            string[] rockPaperScissors = Enum.GetNames(typeof(Roshambo));
+            string randomThrow = rockPaperScissors[randomFromEnum.Next(0, rockPaperScissors.Length)];
             return randomThrow;
-
         }
+
     }
 }
