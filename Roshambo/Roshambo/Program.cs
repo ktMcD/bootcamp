@@ -5,7 +5,7 @@ namespace Roshambo
     {
         private static void Main(string[] args)
         {
-            Program Roshambo = new Program();
+            Program HumanPlayer = new Program();
         }
     }
 }

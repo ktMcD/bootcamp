@@ -1,0 +1,85 @@
+class Program
+    {
+        static void Main(string[] args)
+        {
+            bool continuegame = false;
+            Random r = new Random();
+            int RandomSelection;
+            do
+            {
+                Console.WriteLine("\nDo you choose rock,paper or scissors");
+                string userChoice = Console.ReadLine();
+                RandomSelection = r.Next(3);
+                if (userChoice.ToLower().Equals("rock") || userChoice.ToLower().Equals("paper") || userChoice.ToLower().Equals("scissors"))
+                {
+                    if (RandomSelection == 1)
+                    {
+                        RandomSelectionPaper(userChoice);
+                    }
+                    else if (RandomSelection == 2)
+                    {
+                        RandomSelectionPaper(userChoice);
+                    }
+                    else if (RandomSelection == 3)
+                    {
+                        RandomSelectionPaper(userChoice);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("\nInvalid Input !!! please enter valid input, rock paper scissors");
+                }
+                Console.WriteLine("\nDo you  want to continue? y/n");
+                var enteredk = Console.ReadKey();
+                //Console.();
+                continuegame = enteredk.Key.ToString().ToLower() == "y";
+            } while (continuegame);
+        }
+
+        public static void RandomSelectionPaper(string userSelection)
+        {
+            if (userSelection.Equals("rock")|| userSelection.Equals("scissors"))
+            {
+                Console.WriteLine("\nRandomPlayer paper");
+
+               Console.WriteLine("Winner!!");
+
+            }
+            else if (userSelection.Equals("paper"))
+            {
+                Console.WriteLine("\nRandomPlayer {0} as well its, a draw :P", userSelection);
+            }
+        }
+        public void RandomSelectionRock(string userSelection)
+        {
+            if (userSelection.Equals("paper") ||  userSelection.Equals("scissors"))
+            {
+                Console.WriteLine("\nRandomPlayer rock");
+                Console.WriteLine("\nYou lost!! Computer won");
+
+            }
+            else if (userSelection.Equals("rock"))
+            {
+                Console.WriteLine("\nRandomPlayer {0} ", userSelection);
+            }
+        }
+        public void RandomSelectionScissors(string userSelection)
+        {
+            Console.WriteLine("\nRandomPlayer scissors");
+            if (userSelection.Equals("rock"))
+            {
+                Console.WriteLine("\nYou won!! Worray");
+
+            }
+            else if(userSelection.Equals("paper"))
+            {
+                Console.WriteLine("\nYou lost!! Computer won");
+
+            }
+            else if (userSelection.Equals("scissors"))
+            {
+                Console.WriteLine("\nRandomPlayer {0} as well its, a draw :P", userSelection);
+            }
+
+        }
+    }

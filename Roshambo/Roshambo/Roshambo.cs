@@ -8,8 +8,8 @@ namespace Roshambo
 {
     public enum Roshambo
     {
-        paper,
-        rock,
-        scissors
+        rock, // beats scissors
+        paper,  // beats rock
+        scissors // beats paper
     }
 }

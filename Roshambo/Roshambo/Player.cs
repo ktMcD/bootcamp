@@ -13,6 +13,6 @@ namespace Roshambo
         public abstract string RoshamboValue{ get; set; }
 
         /* methods */
-        public abstract void GenerateRoshambo();
+        public abstract string GenerateRoshambo();
     }
 }
