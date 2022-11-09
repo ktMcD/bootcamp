@@ -6,22 +6,23 @@ using System.Threading.Tasks;
 
 namespace Roshambo
 {
-    internal class Validation
+    public class Validation
     {
         // validate for string values
-        public bool ValidateDataEntry(string textIn, string expectedText)
+        public bool ValidateHumanThrow(string textIn) // validate against the enum
         {
-            bool pass = true;
-            return pass;
+            List<string> roshamboThrows = new List<string>();
+            roshamboThrows = Enum.GetNames(typeof(Roshambo)).ToList();
+            return roshamboThrows.Contains(textIn);
         }
 
-        // validate for number values
-        public bool ValidateDataEntry(int numberIn, int expectedValue)
+        public bool ValidateOpponent(string textIn)
         {
-            bool pass = true;
-            // test for valid number
-            // test for expected value (if appropriate)
-            return pass;
+            if (textIn == "r" || textIn == "o")
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
