@@ -20,10 +20,7 @@ namespace Roshambo
 
         public override string GenerateRoshambo()
         {
-            string roThrow = "";
-            string randomThrow = GetRandomEnum<Roshambo>();
-            return roThrow;
-
+            return GetRandomEnum<Roshambo>();
         }
 
         public string GetRandomEnum<Roshambo>()

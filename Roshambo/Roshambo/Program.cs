@@ -4,65 +4,65 @@ namespace Roshambo
 {
     public class Program
     {
-        Communication speakWithUser = new Communication();
-        Validation checkDataEntry = new Validation();
-        string humanPlayerName = "friend";
-        int randyScore = 0;
-        int rockyScore = 0;
-        int humanScore = 0;
-        int totalGames = 0;
+        public UserDecision humanPreference = new UserDecision();
+        public Communication speakWithUser = new Communication();
+        public Validation checkDataEntry = new Validation();
+        public Stats stats = new Stats();
+        HumanPlayer human = new HumanPlayer("friend");
 
         private static void Main(string[] args)
         {
-            Program HumanPlayer = new Program();
-            HumanPlayer.PlayRoshambo();
+            Program driver = new Program();
+            driver.PlayRoshambo();
         }
 
         private void PlayRoshambo()
         {
             bool playAgain = true;
             string opponent;
-            string humanPlayerResponse;
             string opponentMove;
             string humanThrow;
             string winner;
+            // ask the human player for their name
+            AssignHumanPlayerName();
             while (playAgain)
             {
-                // ask the human player for their name
-                speakWithUser.TalkToUser("Greetings! What's your name?");
-                humanPlayerResponse = speakWithUser.ListenToUser();
-                speakWithUser.TalkToUser(humanPlayerResponse);
-                AssignHumanPlayerName(humanPlayerResponse);
+                playAgain = false;
                 // give the human player a choice of opponents
                 opponent = SelectOpponent();
                 // call method to activate selected opponent
                 opponentMove = MoveOpponent(opponent);
                 // ask human player for their throw
-                humanThrow = GetHumanPlayerThrow();
+                // humanThrow = GetHumanPlayerThrow();
+                humanThrow = human.GenerateRoshambo();
                 // figure out and announce winner
                 winner = FindTheWinner(humanThrow, opponent, opponentMove);
                 speakWithUser.TalkToUser("The winner for this round is: ", winner);
                 // increment total games and add one to the winner's score variable
-                UpdateStats(winner);
+                stats.UpdateStats(winner);
                 // ask Human Player if they'd like to play again
-                playAgain = WannaPlayAgain();
+                playAgain = humanPreference.WannaPlayAgain();
                 if (!playAgain)
                 {
                     // display the overall results of the sesh, total games played and who won what
                     // end the process
-                    ReportStats();
-                    ThankYouForPlaying();
+                    stats.ReportStats();
+                    humanPreference.ThankYouForPlaying();
                 }
             }
         }
 
-        private void AssignHumanPlayerName(string humanName)
+        private void AssignHumanPlayerName()
         {
-            // humanPlayerName defaults to "friend" if null or ""
+            string humanPlayerResponse;
+            speakWithUser.TalkToUser("Greetings! What's your name?");
+            humanPlayerResponse = speakWithUser.ListenToUser();
+            speakWithUser.TalkToUser(humanPlayerResponse);
+            // human.Name defaults to "friend" if user response is null or ""
             // so we'll only update if we have a non-blank/null value 
-            if (humanName != "" && humanName != null)
+            if (humanPlayerResponse != "" && humanPlayerResponse != null)
             {
-                humanPlayerName = humanName;
+                human.Name = humanPlayerResponse;
             }
         }
 
@@ -79,13 +79,27 @@ namespace Roshambo
                 validOpponent = checkDataEntry.ValidateOpponent(selectedOpponent);
                 if (!validOpponent)
                 {
-                    tryAgain = TryAgain("invalid opponent");
+                    tryAgain = humanPreference.TryAgain("invalid opponent");
                     if (!tryAgain)
                     {
-                        ThankYouForPlaying();
+                        stats.ReportStats();
+                        humanPreference.ThankYouForPlaying();
                     }
                 }
             } while (tryAgain);
+            // we've validated the opponent or exited here
+            switch (selectedOpponent)
+            {
+                case "r":
+                    selectedOpponent = "randy";
+                    break;
+                case "o":
+                    selectedOpponent = "rocky";
+                    break;
+                default:
+                    selectedOpponent = "nobody"; // we should never ever ever get here (LMAO!)
+                    break;
+            }
             return selectedOpponent;
         }
 
@@ -96,11 +110,11 @@ namespace Roshambo
             {
                 case "rocky":
                     RockPlayer rocky = new RockPlayer();
-                    opponentMove = rocky.GenerateRoshambo(); // always gonna be rock
+                    opponentMove = rocky.RoshamboValue; // always gonna be rock
                     break;
                 case "randy":
                     RandomPlayer randy = new RandomPlayer();
-                    opponentMove = randy.GenerateRoshambo();
+                    opponentMove = randy.RoshamboValue;
                     break;
                 default: // this should never happen since we validate before getting here; but just in case...
                     opponentMove = "woopsy! something bad happened";
@@ -108,48 +122,12 @@ namespace Roshambo
             }
             return opponentMove;
         }
-
-        private string GetHumanPlayerThrow()
-        {
-            string playerThrow = "";
-            bool validThrow = false;
-            bool keepTrying = true;
-            while (keepTrying)
-            {
-                speakWithUser.TalkToUser("What is your Roshambo throw?");
-                speakWithUser.TalkToUser("Please select \"r\" for Rock, \"p\" for Paper or \"s\" for Scissors");
-                playerThrow = speakWithUser.ListenToUser().ToLower();
-                validThrow = checkDataEntry.ValidateHumanThrow(playerThrow);
-                if (!validThrow)
-                {
-                    keepTrying = TryAgain("invalid throw");
-                    if (!keepTrying)
-                    {
-                        ThankYouForPlaying();
-                    }
-                }
-            }
-            switch (playerThrow)
-            {
-                case "r":
-                    playerThrow = "rock";
-                    break;
-                case "p":
-                    playerThrow = "paper";
-                    break;
-                default:
-                    playerThrow = "scissors";
-                    break;
-            }
-            return playerThrow;
-        }
-
-        private string FindTheWinner(string human, string opponent, string opponentThrow)
+        private string FindTheWinner(string humanThrow, string opponent, string opponentThrow)
         {
             string theWinner = "";
-            speakWithUser.TalkToUser($"Great! You chose {human}.");
+            speakWithUser.TalkToUser($"Great! You chose {humanThrow}.");
             speakWithUser.TalkToUser($"{opponent} chose {opponentThrow}.");
-            switch (human)
+            switch (humanThrow)
             {
                 case "rock":
                     switch (opponentThrow)
@@ -158,7 +136,7 @@ namespace Roshambo
                             theWinner = "draw";
                             break;
                         case "paper":
-                            theWinner = humanPlayerName;
+                            theWinner = human.Name;
                             break;
                         case "scissors":
                             theWinner = opponent;
@@ -169,7 +147,7 @@ namespace Roshambo
                     switch (opponentThrow)
                     {
                         case "rock":
-                            theWinner = humanPlayerName;
+                            theWinner = human.Name;
                             break;
                         case "paper":
                             theWinner = "draw";
@@ -186,7 +164,7 @@ namespace Roshambo
                             theWinner = opponent;
                             break;
                         case "paper":
-                            theWinner = humanPlayerName;
+                            theWinner = human.Name;
                             break;
                         case "scissors":
                             theWinner = "draw";
@@ -199,74 +177,6 @@ namespace Roshambo
 
             }
             return theWinner;
-        }
-
-        private void UpdateStats(string winner)
-        {
-            totalGames += 1;
-            switch (winner)
-            {
-                case "rocky":
-                    rockyScore += 1;
-                    break;
-                case "randy":
-                    randyScore += 1;
-                    break;
-                default:
-                    humanScore += 1;
-                    break;
-            }
-
-        }
-
-        private void ReportStats()
-        {
-            speakWithUser.TalkToUser("Here are your stats for this session:");
-            speakWithUser.TalkToUser("Games you won: ", humanScore.ToString());
-            speakWithUser.TalkToUser("Games Rocky won: ", rockyScore.ToString());
-            speakWithUser.TalkToUser("Games Randy won: ", randyScore.ToString());
-            speakWithUser.TalkToUser("Total games played: ", totalGames.ToString());
-        }
-
-        private bool TryAgain(string errorMessage)
-        {
-            string messageToUser = "";
-            switch (errorMessage)
-            {
-                case "invalid opponent":
-                    messageToUser = "You have entered an invalid opponent";
-                    break;
-                case "invalid throw":
-                    messageToUser = "Your throw selection is invalid.\n" +
-                                    "Please only select Rock (\"r\"), Paper (\"p\") or Scissors (\"s\")";
-                    break;
-            }
-            speakWithUser.TalkToUser(messageToUser);
-            speakWithUser.TalkToUser("If you quit now, your stats might now be accurate");
-            return WannaPlayAgain();
-        }
-
-        private bool WannaPlayAgain()
-        {
-            string humanPlayerResponse;
-            speakWithUser.TalkToUser("Would you like to give it another whirl? \"y\" or \"yes\" to continue");
-            speakWithUser.TalkToUser("Anything else to quit");
-            humanPlayerResponse= speakWithUser.ListenToUser().Trim().ToLower();
-            if (humanPlayerResponse != "y" && humanPlayerResponse != "yes")
-            {
-                return true;
-            }
-            return false;
-        }
-
-        private void ThankYouForPlaying()
-        {
-            ReportStats();
-            speakWithUser.TalkToUser("Great to play with you. Come back soon.");
-            speakWithUser.TalkToUser("So long!");
-            Console.ReadKey();
-            Environment.Exit(0);
-
         }
     }
 }

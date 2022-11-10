@@ -14,13 +14,12 @@ namespace Roshambo
         public RockPlayer()
         {
             Name = "Rocky";
-            RoshamboValue = "rock";
+            RoshamboValue = GenerateRoshambo();
         }
 
         public override string GenerateRoshambo()
         {
             return "rock";
-
         }
     }
 }

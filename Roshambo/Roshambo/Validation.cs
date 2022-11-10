@@ -8,12 +8,33 @@ namespace Roshambo
 {
     public class Validation
     {
-        // validate for string values
-        public bool ValidateHumanThrow(string textIn) // validate against the enum
+        public bool ValidateHumanThrow(string textIn, out string roshamboThrow) // validate against the enum
         {
-            List<string> roshamboThrows = new List<string>();
-            roshamboThrows = Enum.GetNames(typeof(Roshambo)).ToList();
-            return roshamboThrows.Contains(textIn);
+            switch (textIn)
+            {
+                case "r":
+                    roshamboThrow = "rock";
+                    break;
+                case "p":
+                    roshamboThrow = "paper";
+                    break;
+                case "s":
+                    roshamboThrow = "scissors";
+                    break;
+                default:
+                    roshamboThrow = "invalid";
+                    break;
+            }
+            try
+            {
+                Enum.Parse<Roshambo>(roshamboThrow, true); // too easy OMG you should see the googs on this crazy!
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool ValidateOpponent(string textIn)
