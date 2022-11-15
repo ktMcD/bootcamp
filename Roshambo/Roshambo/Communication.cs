@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace Roshambo
 {
-    public class Communication
+    public static class Communication
     {
         // Console.WriteLine with fields
-        public void TalkToUser(string theText, string theFieldValue)
+        public static void TalkToUser(string theText, string theFieldValue)
         {
             Console.WriteLine($"{theText} {theFieldValue}");
         }
 
         // Console.WriteLine with no field values
-        public void TalkToUser(string theText)
+        public static void TalkToUser(string theText)
         {
             Console.WriteLine($"{theText}");
         }
 
         // Console.ReadLine 
-        public string ListenToUser()
+        public static string ListenToUser()
         {
             return Console.ReadLine().Trim();
         }
