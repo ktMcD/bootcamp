@@ -10,6 +10,7 @@
         public string? Lore { get; set; }
         public bool? IsEnchanted { get; set; }
         public bool? IsBreakable { get; set; }
+        public virtual List<CharacterItemRelationship> Relationships { get; set; } = new List<CharacterItemRelationship>();
 
     }
 }

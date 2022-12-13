@@ -19,7 +19,8 @@ namespace DungeonMasterDTO
         public int? CharacterRaceId { get; set; }
         public virtual CharacterRace CharacterRace { get; set; }
         public int? CharacterClassId { get; set; }
-        public virtual CharacterClass CharacterClass { get; set; }  
+        public virtual CharacterClass CharacterClass { get; set; }
+        public virtual List<CharacterItemRelationship> Relationships { get; set; } = new List<CharacterItemRelationship>();
 
-}
+    }
 }

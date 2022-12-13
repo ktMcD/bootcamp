@@ -58,7 +58,20 @@ void DisplayAllItems()
     {
         Console.WriteLine($" - {item.Name}, {item.Description}");
     }
+
+    foreach (var character in _dungeonCharacterInteractor.GetAllCharacters())
+    {
+        // TERNARY STATEMENT -- SINGLE LINE IF/THEN
+        // IF/THEN statement used to set a value
+        // varible = condition ? true value : false value
+        string characterClass = character.CharacterClass == null ? "No Class" : character.CharacterClass.Name;
+        string characterRace = character.CharacterRace == null ? "No Race" : character.CharacterRace.Name;
+
+        Console.WriteLine($"{character.CharacterName} - {characterRace} - {characterClass}");
+
+    }
 }
+
 void DisplayItemInformation(int itemId)
 {
     Console.WriteLine();

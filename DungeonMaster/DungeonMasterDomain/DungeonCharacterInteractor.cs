@@ -7,9 +7,16 @@ namespace DungeonMasterDomain
     public class DungeonCharacterInteractor
     {
         public DungeonCharacterRepository _repository;
+
         public DungeonCharacterInteractor()
         {
             _repository = new DungeonCharacterRepository();
         }
+        public List<Character> GetAllCharacters()
+        {
+            return _repository.GetAllCharacters();
+        }
+
+
     }
 }
