@@ -11,6 +11,8 @@ namespace DungeonMasterRepository
         public DbSet<Character> Characters { get; set; }
         public DbSet<DungeonCell> DungeonCells { get; set; }
         public DbSet<Npc> Npcs { get; set; }
+        public DbSet<CharacterRace> CharacterRaces { get; set; }
+        public DbSet<CharacterClass> CharacterClasses { get; set; } 
         public ApplicationDBContext() // required to have an empty constructor. Don't delete.
         {
 

@@ -16,5 +16,10 @@ namespace DungeonMasterDTO
         [DefaultValue(100)]
         public int HitPoints { get; set; }
         public string? BackStory { get; set; }
-    }
+        public int? CharacterRaceId { get; set; }
+        public virtual CharacterRace CharacterRace { get; set; }
+        public int? CharacterClassId { get; set; }
+        public virtual CharacterClass CharacterClass { get; set; }  
+
+}
 }

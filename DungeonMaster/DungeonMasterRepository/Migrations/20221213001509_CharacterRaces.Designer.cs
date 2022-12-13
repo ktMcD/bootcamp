@@ -4,6 +4,7 @@ using DungeonMasterRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DungeonMasterRepository.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221213001509_CharacterRaces")]
+    partial class CharacterRaces
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,9 +36,6 @@ namespace DungeonMasterRepository.Migrations
                     b.Property<string>("BackStory")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CharacterClassId")
-                        .HasColumnType("int");
-
                     b.Property<string>("CharacterName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -51,28 +51,9 @@ namespace DungeonMasterRepository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CharacterClassId");
-
                     b.HasIndex("CharacterRaceId");
 
                     b.ToTable("Characters");
-                });
-
-            modelBuilder.Entity("DungeonMasterDTO.CharacterClass", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CharacterClasses");
                 });
 
             modelBuilder.Entity("DungeonMasterDTO.CharacterRace", b =>
@@ -188,22 +169,11 @@ namespace DungeonMasterRepository.Migrations
 
             modelBuilder.Entity("DungeonMasterDTO.Character", b =>
                 {
-                    b.HasOne("DungeonMasterDTO.CharacterClass", "CharacterClass")
-                        .WithMany("Characters")
-                        .HasForeignKey("CharacterClassId");
-
                     b.HasOne("DungeonMasterDTO.CharacterRace", "CharacterRace")
                         .WithMany("Characters")
                         .HasForeignKey("CharacterRaceId");
 
-                    b.Navigation("CharacterClass");
-
                     b.Navigation("CharacterRace");
-                });
-
-            modelBuilder.Entity("DungeonMasterDTO.CharacterClass", b =>
-                {
-                    b.Navigation("Characters");
                 });
 
             modelBuilder.Entity("DungeonMasterDTO.CharacterRace", b =>
