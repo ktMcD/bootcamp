@@ -11,8 +11,8 @@ using MovieDatabaseMasterRepository;
 namespace MovieDatabaseMasterRepository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221215013931_initialSetupMovieTable")]
-    partial class initialSetupMovieTable
+    [Migration("20221215142358_oneMoreTime5")]
+    partial class oneMoreTime5
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

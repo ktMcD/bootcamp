@@ -5,7 +5,7 @@
 namespace MovieDatabaseMasterRepository.Migrations
 {
     /// <inheritdoc />
-    public partial class initialSetupMovieTable : Migration
+    public partial class oneMoreTime5 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
