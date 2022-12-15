@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MovieDatabaseMasterDTO;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
@@ -6,6 +7,7 @@ namespace MovieDatabaseMasterRepository
 {
     public class ApplicationDbContext : DbContext
     {
+        public DbSet<MovieDatabaseItem> Movies { get; set; }
 
         // also need an empty constructor here
         public ApplicationDbContext()
