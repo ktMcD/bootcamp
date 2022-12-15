@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MovieDatabaseMasterDomain\MovieDatabaseMasterDomain.csproj" />
+    <ProjectReference Include="..\MovieDatabaseMasterDTO\MovieDatabaseMasterDTO.csproj" />
+  </ItemGroup>
+
 </Project>
