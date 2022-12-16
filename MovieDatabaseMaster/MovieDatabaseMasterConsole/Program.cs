@@ -35,7 +35,6 @@ namespace MovieDatabaseMaster
 
         private List<MovieDatabaseItem> BuildItemCollection()
         {
-            Console.WriteLine("begin");
             List<MovieDatabaseItem> initialItems = new List<MovieDatabaseItem>();
             initialItems.Add(new MovieDatabaseItem() { MovieTitle = "Die Hard", Genre = "Action, Drama", Runtime = 132 });
             initialItems.Add(new MovieDatabaseItem() { MovieTitle = "Unforgiven", Genre = "Western, Drama", Runtime = 130 });
@@ -53,7 +52,6 @@ namespace MovieDatabaseMaster
             initialItems.Add(new MovieDatabaseItem() { MovieTitle = "Bladerunner", Genre = "Action, Sci-Fi", Runtime = 117 });
             initialItems.Add(new MovieDatabaseItem() { MovieTitle = "Joker", Genre = "Crime, Drama, Thriller", Runtime = 122 });
             initialItems.Add(new MovieDatabaseItem() { MovieTitle = "The Shining", Genre = "Drama, Horror", Runtime = 136 });
-            Console.WriteLine("end");
             return initialItems;
         }
         void InsertMovieRecords()
@@ -62,19 +60,19 @@ namespace MovieDatabaseMaster
             {
                 if (_movieItemInteractor.AddNewItem(movie) == true)
                 {
-                    Console.WriteLine($"{movie.MovieTitle}: Yep!");
+                    Communicator.TalkToUser($"{movie.MovieTitle}: Yep!");
                 }
                 else
                 {
-                    Console.WriteLine($"{movie.MovieTitle}: It's ok, baby. You tried.");
+                    Communicator.TalkToUser($"{movie.MovieTitle}: It's ok, baby. You tried.");
                 }
             }
         }
 
         void DisplayAllItems()
         {
-            Console.WriteLine();
-            Console.WriteLine("The following items are in the database");
+            Communicator.TalkToUser("");
+            Communicator.TalkToUser("The following items are in the database");
             foreach (MovieDatabaseItem movie in _movieItemInteractor.GetAllItems())
             {
                 Console.WriteLine($" - {movie.MovieTitle,-31} | {movie.Genre,-33} | Runtime: {movie.Runtime,-3} min.");
@@ -83,10 +81,9 @@ namespace MovieDatabaseMaster
 
         void DisplayTitleInformation(string movieTitle)
         {
-            Console.WriteLine();
-            Console.WriteLine($"Searching for {movieTitle}");
+            Communicator.TalkToUser("");
+            Communicator.TalkToUser($"Searching for {movieTitle}");
             bool doesMovieExist = _movieItemInteractor.GetTitlesIfExists(movieTitle, out List<MovieDatabaseItem> movies);
-            Console.WriteLine($"Movie Exists {doesMovieExist}");
             if (doesMovieExist)
             {
                 foreach (MovieDatabaseItem movie in movies)
@@ -97,14 +94,15 @@ namespace MovieDatabaseMaster
             }
             else
             {
-                Console.WriteLine("Nothing with that title exists in the library");
+                Communicator.TalkToUser("Nothing with that title exists in the library");
             }
         }
 
         void DisplayGenreInformation(string movieGenre)
         {
-            Console.WriteLine();
-            Console.WriteLine($"Searching movie genre {movieGenre}");
+            Communicator.TalkToUser("");
+            Communicator.TalkToUser($"Searching for movie genre {movieGenre}");
+            Communicator.TalkToUser("");
             bool doesMovieExist = _movieItemInteractor.GetGenresIfExists(movieGenre, out List<MovieDatabaseItem> movies);
             if (doesMovieExist)
             {
@@ -113,7 +111,8 @@ namespace MovieDatabaseMaster
             }
             else
             {
-                Console.WriteLine("Sorry, we don't carry anything in that genre.");
+                Communicator.TalkToUser("Sorry, we don't carry anything in that genre.");
+                Communicator.TalkToUser("");
             }
         }
 

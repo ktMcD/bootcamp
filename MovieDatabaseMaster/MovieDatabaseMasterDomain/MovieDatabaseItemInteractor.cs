@@ -31,16 +31,20 @@ namespace MovieDatabaseMasterDomain
 
         public bool GetTitlesIfExists(string movieTitle, out List<MovieDatabaseItem> itemToReturn)
         {
+            bool areResultsNull;
             IEnumerable<MovieDatabaseItem> movies = new List<MovieDatabaseItem>();
             movies = _respository.SearchMoviesByTitle(movieTitle, out itemToReturn);
-            return itemToReturn != null;
+            areResultsNull = movies.Any();
+            return areResultsNull;
         }
 
         public bool GetGenresIfExists(string movieGenre, out List<MovieDatabaseItem> itemToReturn)
         {
+            bool areResultsNull;
             IEnumerable<MovieDatabaseItem> movies = new List<MovieDatabaseItem>();
             movies = _respository.SearchMoviesByGenre(movieGenre, out itemToReturn);
-            return itemToReturn != null;
+            areResultsNull = movies.Any();
+            return areResultsNull;
         }
     }
 }
