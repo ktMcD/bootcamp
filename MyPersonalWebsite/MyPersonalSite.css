@@ -4,16 +4,90 @@
   
   body {
     margin: 40px;
-    background-color: #fff;
+    background-color: #85596f;
+    font-family: Arial, Helvetica, sans-serif;
   }
   
-  h1, p {
+  h1, h2, h3, p {
     margin: 0 0 1em 0;
-    font-family: 'sans-serif';
+  }
+
+  .level1{
+    font-size: 140%;
+    color: #595985;
+  }
+
+  .level2{
+    font-size: 110%;
+    color: #595985;
+  }
+
+  .anchorLight{
+    text-decoration: underline;
+    color: #D0B8A8;
+  }
+
+  .anchorLight:hover{
+    font-style: italic;
+    font-weight: bold;
+    color: #D0B8A8;
+  }
+
+  .anchorDark{
+    text-decoration: underline;
+    color: #505078;
+  }
+
+  .anchorDark:hover{
+    font-style: italic;
+    font-weight: bold;
+    color: #505078;
+  }
+
+  .sans {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .serif{
+    font-family: serif;
+  }
+
+  .normal{
+    font-weight: normal;
+    font-style: normal;
+    font-size: 80%;
+  }
+
+  .bolder{
+    font-weight: bolder;
+  }
+
+  .italicized{
+    font-style: italic;
+  }
+
+  .strikethrough{
+    text-decoration: line-through;
+  }
+
+   .moreTopSpace{
+    margin-top: 10px;
+  }
+
+  .moreTopSpacePlus10{
+    margin-top: 20px;
+  }
+
+  .lessBottomSpace{
+    margin-bottom: 6px;
+  }
+
+  .superSmol{
+    font-size: 50%;
   }
   
   .wrapper {
-    max-width: 940px;
+    max-width: 1000px;
     margin: 0 20px;
     display: grid;
     grid-gap: 10px;
@@ -22,59 +96,32 @@
   
   /* I don't believe I like this setting but I'm leaving it for now */
   @media screen and (min-width: 500px) {
-  
-    .sidebarPink {
+
+    .sidebar {
       float: left;
-      width: 19.1489%;
-      background-color: #c147e9;
-      color: #fff;
+      width: 15%;
+      background-color: #D0B8A8;
+      font-weight: bolder;
+      color: #505078;
     }
   
-    .contentPink {
+    .content {
       float: right;
-      width: 79.7872%;
-      background-color: #c147e9;
-      color: #fff;
+      width: 85%;
+      background-color: #D0B8A8;
+      color: #505078;
+      font-family: serif;
     }
 
-    .sidebarPurp {
-        float: left;
-        width: 19.1489%;
-        background-color: #810ca8;
-        color: #fff;
-      }
-    
-      .contentPurp {
-        float: right;
-        width: 79.7872%;
-        background-color: #810ca8;
-        color: #fff;
-      }
-
-      .sidebarDark {
-        float: left;
-        width: 19.1489%;
-        background-color: #2d033b;
-        color: #fff;
-      }
-    
-      .contentDark {
-        float: right;
-        width: 79.7872%;
-        background-color: #2d033b;
-        color: #fff;
-      }
-  
     .wrapper {
-      font-family: 'Open Sans', 'sans-serif';
       margin: 0 auto;
       grid-template-columns: 1fr 3fr;
     }
     
     .header, .footer {
       grid-column: 1 / -1;
-      background-color: #e5b8f4;
-      color: #000080;
+      background-color: #595985;
+      color: #D0B8A8;
       /* needed for the floated layout */
       clear: both;
     }
@@ -83,7 +130,7 @@
   .wrapper > * {
     border-radius: 5px;
     padding: 20px;
-    font-size: 150%;
+    font-size: 115%;
     /* needed for the floated layout*/
     margin-bottom: 10px;
   }
