@@ -1,0 +1,3 @@
+coffee-esque palette: bg: #997f66 content: #999966 contrast:  #996666 (analogous)
+
+text: #f8ede3, bg: #d0b8a8, content: #dfddc3, contrast: #85596f
