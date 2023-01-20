@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using DungeonMasterDTO;
+using DungeonMasterDomain;
 
 namespace DungeonMasterWebApp
 {
@@ -22,5 +24,22 @@ namespace DungeonMasterWebApp
 
         [DisplayName("Is Item Breakable")]
         public bool IsBreakable { get; set; } = true;
+
+        public static ItemViewModel ViewModelMapper(Item itemDTO)
+        {
+            return new ItemViewModel
+            {
+                Id = itemDTO.Id,
+                Name = itemDTO.Name,
+                Description = itemDTO.Description,
+                AttackModifier = itemDTO.AttackModifier,
+                DefenseModifier = itemDTO.DefenseModifier,
+                Lore = itemDTO.Lore,
+                IsEnchanted = itemDTO.IsEnchanted == null ? false : (bool)itemDTO.IsEnchanted,
+                IsBreakable = itemDTO.IsBreakable == null ? false : (bool)itemDTO.IsBreakable
+            };
+        }
+
+
     }
 }
