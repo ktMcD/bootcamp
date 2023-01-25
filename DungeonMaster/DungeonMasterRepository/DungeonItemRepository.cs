@@ -42,7 +42,7 @@ namespace DungeonMasterRepository
         {
             using (ApplicationDBContext db = new ApplicationDBContext(_optionsBuilder.Options))
             {
-                return db.Items.ToList();
+                 return db.Items.ToList();
             }
         }
 

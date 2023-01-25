@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyWebApp.Models;
 
 namespace MyWebApp.Controllers
 {
@@ -24,7 +25,8 @@ namespace MyWebApp.Controllers
         // GET: StudentController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            StudentViewModel student = repo.GetMockStudents().FirstOrDefault(x => x.Id == id);
+            return View(student);
         }
 
         // GET: StudentController/Create
@@ -40,18 +42,30 @@ namespace MyWebApp.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                StudentViewModel newStudent = new StudentViewModel()
+                {
+                    Name = collection["Name"],
+                    Course = collection["Course"],
+                    TechnicalExperience = collection["TechnicalExperience"],
+                    PreviousCourseCount = int.Parse(collection["PreviousCourseCount"])
+                };
+
+                repo.CreateStudent(newStudent);
+                return RedirectToAction(nameof(List));
             }
+
             catch
             {
                 return View();
             }
+
         }
 
         // GET: StudentController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            StudentViewModel student = repo.GetMockStudents().FirstOrDefault(x => x.Id == id);
+            return View(student);
         }
 
         // POST: StudentController/Edit/5
@@ -61,7 +75,16 @@ namespace MyWebApp.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                StudentViewModel updatedStudent = new StudentViewModel()
+                {
+                    Id = int.Parse(collection["Id"]),
+                    Name = collection["Name"],
+                    Course = collection["Course"],
+                    TechnicalExperience = collection["TechnicalExperience"],
+                    PreviousCourseCount = int.Parse(collection["PreviousCourseCount"])
+                };
+                repo.UpdateStudent(updatedStudent);
+                return RedirectToAction(nameof(List));
             }
             catch
             {
@@ -72,7 +95,8 @@ namespace MyWebApp.Controllers
         // GET: StudentController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            StudentViewModel student = repo.GetMockStudents().FirstOrDefault(x => x.Id == id);
+            return View(student);
         }
 
         // POST: StudentController/Delete/5
@@ -82,7 +106,8 @@ namespace MyWebApp.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                repo.DeleteStudent(id);
+                return RedirectToAction(nameof(List));
             }
             catch
             {
