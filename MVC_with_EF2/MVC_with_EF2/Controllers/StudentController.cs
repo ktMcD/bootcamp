@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MVC_with_EF2.Models;
 using MVC_with_EF2.DataAccessLayer;
 
 namespace MVC_with_EF2.Controllers
@@ -10,7 +9,7 @@ namespace MVC_with_EF2.Controllers
         private SchoolContext db = new SchoolContext();
         public IActionResult Index()
         {
-            return View();
+            return View(db.Students.ToList());
         }
     }
 }

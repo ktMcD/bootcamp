@@ -4,6 +4,7 @@ using MVC_with_EF2.DataAccessLayer;
 
 
 namespace MVC_with_EF2.Controllers
+
 {
     public class CourseController : Controller
     {
@@ -11,7 +12,7 @@ namespace MVC_with_EF2.Controllers
         private SchoolContext db = new SchoolContext();
         public IActionResult Index()
         {
-            return View();
+            return View(db.Courses.ToList());
         }
     }
 }

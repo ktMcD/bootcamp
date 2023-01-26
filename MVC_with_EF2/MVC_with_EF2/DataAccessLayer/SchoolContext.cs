@@ -20,9 +20,9 @@ namespace MVC_with_EF2.DataAccessLayer
 
         private static IConfigurationRoot _configuration;
         // <Student> is the model class name, "Students" is the database name
-        DbSet<Student> Students { get; set; }
-        DbSet<Course> Courses { get; set; }
-        DbSet<Enrollment> Enrollments { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Enrollment> Enrollments { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
