@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
+using MVC_with_EF2.Models;
 
 
 namespace MVC_with_EF2.DataAccessLayer

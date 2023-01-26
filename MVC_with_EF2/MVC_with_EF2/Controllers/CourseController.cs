@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC_with_EF2.Models;
 using MVC_with_EF2.DataAccessLayer;
+
 
 namespace MVC_with_EF2.Controllers
 {
