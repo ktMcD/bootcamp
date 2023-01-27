@@ -61,7 +61,7 @@ namespace MVC_with_EF2.Controllers
                 newStudent.ID = db.Students.Max(x => x.ID) + 1;
                 db.Students.Add(newStudent);
                 db.SaveChanges();
-                return RedirectToAction(nameof(Student));
+                return RedirectToAction(nameof(Index));
 
             }
 
