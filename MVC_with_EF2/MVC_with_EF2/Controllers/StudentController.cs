@@ -60,6 +60,9 @@ namespace MVC_with_EF2.Controllers
                     EnrollmentDate = DateTime.Parse(collection["EnrollmentDate"])
                 };
                 AddStudent(newStudent);
+                newStudent.ID = db.Students.Max(x => x.ID) + 1;
+                db.Students.Add(newStudent);
+                db.SaveChanges();
                 return RedirectToAction(nameof(Index));
 
             }
