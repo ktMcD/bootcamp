@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Flurl;
-using ConsumingAPIs;
 using ConsumingAPIs.Models;
 using Flurl.Http;
 

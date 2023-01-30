@@ -1,7 +1,4 @@
-﻿using ConsumingAPIs;
-using ConsumingAPIs.Models;
-
-namespace ConsumingAPIs.Models
+﻿namespace ConsumingAPIs.Models
 {
     public class ClassDetailsApi
     {

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MVC_with_EF2.DataAccessLayer;
 using MVC_with_EF2.Models;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace MVC_with_EF2.Controllers
 {
@@ -45,31 +46,35 @@ namespace MVC_with_EF2.Controllers
             return View();
         }
 
-        // POST: StudentController/Create
+        // POST: Student/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public Student Create(IFormCollection collection)
+        public ActionResult CreateJelly(IFormCollection collection)
         {
             try
             {
                 Student newStudent = new Student()
                 {
-                    LastName = collection["Name"],
-                    FirstMidName = collection["Course"],
+                    LastName = collection["LastName"],
+                    FirstMidName = collection["FirstMidName"],
                     EnrollmentDate = DateTime.Parse(collection["EnrollmentDate"])
                 };
-                newStudent.ID = db.Students.Max(x => x.ID) + 1;
-                db.Students.Add(newStudent);
-                db.SaveChanges();
-                return RedirectToAction(nameof(Student));
+                AddStudent(newStudent);
+                return RedirectToAction(nameof(Index));
 
             }
 
-            catch
+            catch (Exception ex)
             {
-                return View(Index);
+                TempData["msg"] = ex.Message;
+                return View();
             }
 
+        }
+        private void AddStudent(Student studentToAdd)
+        {
+            db.Students.Add(studentToAdd);
+            db.SaveChanges();
         }
 
     }

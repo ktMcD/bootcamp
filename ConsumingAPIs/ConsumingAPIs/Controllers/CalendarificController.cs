@@ -9,6 +9,7 @@ namespace ConsumingAPIs.Controllers
     {
         public IActionResult Index()
         {
+            CalendarificHolidayApi cal = new CalendarificHolidayApi();
             int year = DateTime.Today.Year;
             int day = DateTime.Today.Day;
             int month = DateTime.Today.Month;
@@ -24,10 +25,10 @@ namespace ConsumingAPIs.Controllers
                     type = "observance"
                 })
                 .SetFragment("after-hash");
-            var apiTask = apiUri.GetJsonAsync<CalendarificListApi>();
+            var apiTask = apiUri.GetJsonAsync<IEnumerable<CalendarificHolidayApi>>();
             apiTask.Wait();
-            CalendarificListApi result = apiTask.Result;
-            return View(result.Holidays);
+            IEnumerable<CalendarificHolidayApi> result = apiTask.Result;
+            return View(result);
         }
     }
 }
