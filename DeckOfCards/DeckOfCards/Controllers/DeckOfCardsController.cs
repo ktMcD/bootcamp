@@ -20,7 +20,6 @@ namespace DeckOfCards.Controllers
 
         }
 
-        [HttpGet("{newHand}")]
         public IActionResult List()
         {
             var apiUri = "https://www.deckofcardsapi.com/api/deck/new/draw/?count=5";

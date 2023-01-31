@@ -55,6 +55,33 @@ namespace APIWithEF.Controllers
             }
         }
 
+        [HttpPost("update")]
+        public HttpResponseMessage UpdateBoardGame(int id, string title, string description, int year, int count)
+        {
+            BoardGame gameToUpdate = new BoardGame
+            {
+                Id = id,
+                Title = title,
+                Description = description,
+                YearPublished = year,
+                RecommendedPlayerCount = count
+            };
 
+            try
+            {
+                if (repo.UpdateBoardGame(gameToUpdate) == true)
+                {
+                    return new HttpResponseMessage(HttpStatusCode.NoContent);
+                }
+                else
+                {
+                    return new HttpResponseMessage(HttpStatusCode.NotFound);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new HttpResponseMessage(HttpStatusCode.ServiceUnavailable);
+            }
+        }
     }
 }

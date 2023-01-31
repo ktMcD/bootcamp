@@ -41,6 +41,17 @@ namespace APIWithEF.DAL
             return true;
         }
 
+        public bool UpdateBoardGame(BoardGame gameToEdit)
+        {
+            if (FindById(gameToEdit.Id) == null)
+            {
+                return false;
+            }
+            _dbContext.BoardGames.Update(gameToEdit);
+            _dbContext.SaveChanges();
+            return true;
+
+        }
 
     }
 }
