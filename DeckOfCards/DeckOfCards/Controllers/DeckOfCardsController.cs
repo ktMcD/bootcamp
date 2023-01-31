@@ -20,16 +20,14 @@ namespace DeckOfCards.Controllers
 
         }
 
-        [HttpGet("{Card}")]
+        [HttpGet("{newHand}")]
         public IActionResult List()
         {
-
             var apiUri = "https://www.deckofcardsapi.com/api/deck/new/draw/?count=5";
             var apiTask = apiUri.GetJsonAsync<List<Card>>();
             apiTask.Wait();
             List<Card> newHand = apiTask.Result;
             return View(newHand);
-
         }
 
     }
