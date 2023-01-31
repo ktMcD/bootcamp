@@ -19,6 +19,7 @@ namespace APIWithEF.DAL
 
         // Create the table based off the model
         public DbSet<BoardGame> BoardGames { get; set; }
+        public DbSet<Fish> Fishes { get; set; }
 
         private static IConfigurationRoot _configuration;
 

@@ -30,14 +30,5 @@
         </dd>
     </dl>
 </div>
-@Html.ActionLink("List", "List", new { /* id=item.PrimaryKey */ })
-<!--
-    <div class="col-md-4">
-    <form asp-controller="DeckOfCards" asp-action="List">
-        <input type="submit" value="Draw 5" class="btn btn-success" />
-    </form>
-    </div>
 
-    
--->
-
+@Html.ActionLink("Draw 5", "List", new { deckId = Model.deck_id })

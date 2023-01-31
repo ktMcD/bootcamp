@@ -3,11 +3,11 @@ using Flurl.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Windows;
+using static System.Net.WebRequestMethods;
 
 namespace DeckOfCards.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+
     public class DeckOfCardsController : Controller
     {
         public IActionResult Index()
@@ -20,13 +20,16 @@ namespace DeckOfCards.Controllers
 
         }
 
-        public IActionResult List()
+        public IActionResult List(string deckId)
         {
-            var apiUri = "https://www.deckofcardsapi.com/api/deck/new/draw/?count=5";
-            var apiTask = apiUri.GetJsonAsync<List<Card>>();
+            string deckOfCardsApi = "https://www.deckofcardsapi.com/api/deck/" + deckId + "/draw/?count=5";
+            var apiUri = deckOfCardsApi;
+            var apiTask = apiUri.GetJsonAsync<RootObject>();
             apiTask.Wait();
-            List<Card> newHand = apiTask.Result;
-            return View(newHand);
+            RootObject result = apiTask.Result;
+            //List<Card> newHand = result.cards.ToList();
+
+            return View(result.cards);
         }
 
     }
