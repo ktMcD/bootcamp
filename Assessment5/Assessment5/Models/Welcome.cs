@@ -6,7 +6,8 @@ namespace Assessment5.Models
     public class Welcome
     {
         [Required]
-        [MaxLength(50)["Login Name")]
+        [MaxLength(50)]
+        [DisplayName ("Login Name")]
         public string? Name { get; set; }
 
         public int? Length { get; set; }
