@@ -6,79 +6,39 @@ namespace Assessment5.Controllers
 {
     public class WelcomeController : Controller
     {
-        // GET: WelcomeController
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: WelcomeController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: WelcomeController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: WelcomeController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: WelcomeController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
         // POST: WelcomeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public void Login(int id, IFormCollection collection)
         {
-            try
+
+            Models.Welcome visitorLogin = new Models.Welcome()
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                Name = collection["Name"],
+                Password = collection["Password"],
+                Length = collection["Name"].ToString().Length,
+            };
+
+            Welcome(visitorLogin);
         }
 
-        // GET: WelcomeController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Welcome(Welcome visitorLogin)
+        {
+            if (visitorLogin.Password != "open sesame")
+            {
+                return RedirectToAction(nameof(WrongPassword));
+            }
+            else
+            {
+                return View(visitorLogin.Name);
+            }
+            
+        }
+
+        // GET: WelcomeController/Create
+        public ActionResult WrongPassword()
         {
             return View();
-        }
-
-        // POST: WelcomeController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }
