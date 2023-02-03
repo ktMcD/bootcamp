@@ -13,7 +13,7 @@ namespace Assessment5.Models
         public int? Length { get; set; }
 
         [Required]
-            [DisplayName("Current Course")]
+            [DisplayName("Password")]
         public string? Password { get; set; }
     }
 }

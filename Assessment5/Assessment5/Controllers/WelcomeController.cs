@@ -6,39 +6,51 @@ namespace Assessment5.Controllers
 {
     public class WelcomeController : Controller
     {
-        // POST: WelcomeController/Edit/5
+        Welcome visitorLogin;
+        public WelcomeController()
+        {
+            visitorLogin = new Welcome();
+        }
+
+        // POST: WelcomeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public void Login(int id, IFormCollection collection)
+        public ActionResult Login(IFormCollection collection)
         {
-
-            Models.Welcome visitorLogin = new Models.Welcome()
+            try
             {
-                Name = collection["Name"],
-                Password = collection["Password"],
-                Length = collection["Name"].ToString().Length,
-            };
+                Models.Welcome visitorLogin = new Models.Welcome()
+                {
+                    Name = collection["Name"],
+                    Password = collection["Password"],
+                    Length = collection["Name"].ToString().Length,
+                };
+                if (collection["Password"] != "open sesame")
+                {
+                    return View("WrongPassword");
+                }
+                return RedirectToAction(nameof(Welcome), visitorLogin);
+            }
+            catch
+            {
+                return View("Error");
+            }
+        }
 
-            Welcome(visitorLogin);
+        public ActionResult Login()
+        {
+            return View();
         }
 
         public ActionResult Welcome(Welcome visitorLogin)
         {
-            if (visitorLogin.Password != "open sesame")
-            {
-                return RedirectToAction(nameof(WrongPassword));
-            }
-            else
-            {
-                return View(visitorLogin.Name);
-            }
-            
+            return View(visitorLogin);
         }
 
-        // GET: WelcomeController/Create
         public ActionResult WrongPassword()
         {
             return View();
         }
+
     }
 }
