@@ -14,22 +14,22 @@ namespace CreatingApis.Controllers
             return Bookstore.AddBookstore(name, category, location);
         }
 
-        [HttpPost("get")]
+        [HttpGet("{id}")]
         public Bookstore FindById(int id)
         {
             return Bookstore.FindById(id);
         }
 
-        [HttpPost("get")]
+        [HttpGet("locationsearch/{location}")]
         public List<Bookstore> FindByLocation(string location)
         {
             return Bookstore.FindbyLocation(location);
         }
 
-        [HttpPost("get")]
-        public List<Bookstore> FindByName(string name)
+        [HttpGet("namesearch/{name}")]
+        public Bookstore FindByName(string name)
         {
-            return Bookstore.FindbyName(name);
+            return Bookstore.FindByName(name);
         }
     }
 }

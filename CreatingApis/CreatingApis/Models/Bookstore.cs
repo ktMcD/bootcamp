@@ -37,5 +37,10 @@
             return Stores.FirstOrDefault(x => x.Id == id);
         }
 
+        public static Bookstore FindByName(string name)
+        {
+            return Stores.FirstOrDefault(x => x.BookstoreName == name);
+        }
+
     }
 }
