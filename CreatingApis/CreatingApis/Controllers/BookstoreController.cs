@@ -14,6 +14,12 @@ namespace CreatingApis.Controllers
             return Bookstore.AddBookstore(name, category, location);
         }
 
+        [HttpGet()]
+        public List<Bookstore> GetAll()
+        {
+            return GetAll();
+        }
+
         [HttpGet("{id}")]
         public Bookstore FindById(int id)
         {
