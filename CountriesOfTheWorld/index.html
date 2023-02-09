@@ -10,10 +10,11 @@
 <body id="Color1">
     <div id="Color2" class="centerElement halfWidth">
         <div id="Color3" class="floatLeft halfWidth">
-            <h2 id="CountryName">Country Name Goes here!</h2>
-            <h2 id="OfficialLanguage">Official Language Goes here!</h2>
-            <h2 id="HelloWorld">Hello World Goes here!</h2>
+            <h2 id="CountryName">Country Name</h2>
+            <h2 id="OfficialLanguage">Language(s) of the country</h2>
+            <h2 id="HelloWorld">Hello World </h2>
             <select id="CountryList">
+                <option value="Nothing">Please select a country</option>
                 <option value="Canada">Canada</option>
                 <option value="Finland">Finland</option>
                 <option value="Haiti">Haiti</option>
@@ -24,6 +25,8 @@
                 <option value="Venezuela">Venezuela</option>
             </select>
             <button onclick="SwitchCountry()">Swap Country</button>
+            <br/><br/>
+            <img id="countryFlag" src="am.png" alt="armenian flag pretty">
         </div>
     </div>
 

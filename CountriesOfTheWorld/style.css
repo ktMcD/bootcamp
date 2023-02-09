@@ -12,6 +12,15 @@
      width: 50%;
 }
 
+#countryFlag {
+    width: 120px;
+    height: 60.5px;
+    background-color: #ffffff;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 div{
     border-style: solid;
     border-width: 1px;
@@ -20,13 +29,13 @@ div{
 }
 
 #Color1{
-    background-color: red;
+    background-color: #3A3CC5;
 }
 
 #Color2{
-    background-color: white;
+    background-color: #C5C33A;
 }
 
 #Color3{
-    background-color:blue;
+    background-color:#ffffff;
 }
