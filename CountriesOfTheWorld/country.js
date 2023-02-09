@@ -62,7 +62,11 @@ function SwitchCountry() {
     else if (input === "Ukraine") {
         country = ukraine;
     } 
-    else if (input === "Venezuela") {
+    else {
         country = venezuela;
     } 
+
+    document.getElementById("CountryName").innerText = country.name;
+    document.getElementById("OfficialLanguage").innerText = country.lang;
+    document.getElementById("HelloWorld").innerText = country.greeting;
 }
