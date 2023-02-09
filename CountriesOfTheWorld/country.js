@@ -18,7 +18,7 @@ let uganda = new Country("Uganda", "English and Swahili", "Salamu, Dunia", ["#FF
 let ukraine = new Country("Ukraine", "Ukrainian", "Dobryy den\'	svit", ["#0057b7", "#ffd700", "#ffffff"], "ukraine.png");
 let venezuela = new Country("Venezuela", "Espanol", "Hola Mundo!", ["#FCE300", "#003DA5", "#EF3340"], "venezuela.png");
 
-function SwitchCountry() {
+function DisplayColors() {
     let input = document.querySelector('#CountryList').value;
     let country;
 
@@ -49,7 +49,6 @@ function SwitchCountry() {
     } 
 
     intro = "You selected ";
-    
     document.getElementById("CountryName").innerText = intro + country.name;
     document.getElementById("OfficialLanguage").innerText = country.name + "'s official language(s): " + country.lang;
     document.getElementById("HelloWorld").innerText = "Hello world: " + country.greeting;
@@ -64,9 +63,4 @@ function SwitchCountry() {
     else {
         document.getElementById("Color1").style.color = "#000000";
     }
-    
 }
-
-um
-
-//"<img src='MatrixLogos/"+add[3]+"' width='100' height='25'/>";
