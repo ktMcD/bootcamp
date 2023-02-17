@@ -1,0 +1,13 @@
+<h1>Character details for {{name}}!</h1>
+<p>My favorite number is {{favoriteNumber}}</p>
+
+<button (click)="toggleStory()">{{buttonText}}</button>
+<div *ngIf="showStory">
+    <app-back-story></app-back-story>
+</div>
+
+<hr>
+<h3>Weapons</h3>
+<ul>
+    <li *ngFor="let weapon of weapons">{{weapon | lowercase}}</li>
+</ul>
