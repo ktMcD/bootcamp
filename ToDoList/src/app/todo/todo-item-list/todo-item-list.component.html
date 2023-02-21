@@ -10,11 +10,8 @@
       <div class="col col2" role="complementary">
         <h3>What are we doing today?</h3>
           <ul *ngfor="let item of items">
-            <form #taskCompleteForm="ngForm" (ngSubmit)="markItemComplete(taskCompleteForm)">
-                <input name="task" id-="task" ngModel>
             <li *ngIf="item.completed === true">#{{item.id}}: {{item.task}}</li>
-            </form>
-            <li *ngIf="item.completed === false"><button>Mark Complete</button> #{{item.id}}: {{item.task}}</li>
+            <li *ngIf="item.completed === false"><button (click)="markItemComplete(item.id)">Mark Complete</button> #{{item.id}}: {{item.task}}</li>
           </ul>
       </div>    
     </div>  
