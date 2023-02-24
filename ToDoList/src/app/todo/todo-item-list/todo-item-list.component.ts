@@ -27,8 +27,8 @@ export class TodoItemListComponent {
   getAllItems(): ITodoList[] {
     return this.items
   }
-  markItemComplete(form:NgForm) : void {
-    // still need to figure out how to get the value
+  markItemComplete(deleteId:number) : void {
+    this.items.splice((deleteId - 1), 1);
   }
   
   addItem(form:NgForm) : void {
